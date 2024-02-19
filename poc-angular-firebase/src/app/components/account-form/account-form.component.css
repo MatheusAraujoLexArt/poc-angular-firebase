@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 40vh;
+}
+
+button {
+  padding: 5px;
+}
