@@ -1,7 +1,39 @@
-<form>
-  <label for="email">E-mail</label>
-  <input type="text" name="email" id="email" placeholder="JohnDoe@gmail.com"/>
-  <label for="password">Password</label>
-  <input type="text" name="password" id="password" placeholder="password"/>
-  <button>Register</button>
-</form>
+<main class="homeContent">
+  <div>
+    <h1>User registration</h1>
+    <form>
+      <label for="email">E-mail</label>
+      <input type="text" name="email" id="email" placeholder="JohnDoe@gmail.com"/>
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password" placeholder="password"/>
+      <button>Register</button>
+    </form>
+    <!-- <form (ngSubmit)="submit()" [formGroup]="userForm" #formDir="ngForm">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          required
+          type="text"
+          name="email"
+          id="email"
+          placeholder="JohnDoe@gmail.com"
+          ngModel
+          formControlName="email"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          required
+          type="text"
+          name="password"
+          id="password"
+          placeholder="******"
+          ngModel
+        />
+      </div>
+      <button type="submit">Register</button>
+    </form> -->
+  </div>
+</main>
