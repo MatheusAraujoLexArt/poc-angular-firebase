@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-account-form',
   standalone: true,
-  imports: [],
+  imports: [MatToolbarModule],
   templateUrl: './account-form.component.html',
   styleUrl: './account-form.component.css'
 })
