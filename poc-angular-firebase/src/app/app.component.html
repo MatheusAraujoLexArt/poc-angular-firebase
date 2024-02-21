@@ -1,4 +1,7 @@
-<mat-toolbar color="primary">Angular Firebase Sign Up App</mat-toolbar>
+<mat-toolbar color="primary">
+  Angular Firebase Sign Up App
+  <span *ngIf="currentUser()">{{ currentUser()?.email }}</span>
+</mat-toolbar>
 
 <div class="container">
   <router-outlet />

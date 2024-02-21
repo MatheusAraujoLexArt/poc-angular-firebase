@@ -4,6 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,18 +16,23 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
 
-  login() {
-    if(!this.loginForm.valid) {
+  async login() {
+    const { email, password } = this.loginForm.value;
+
+    if(!this.loginForm.valid || !email || !password) {
       return;
     }
 
-    console.log('Validations passed!')
+    await this.authService.login(email, password);
+    this.router.navigate(['/home']);
   }
 
   email = this.loginForm.get('email');
