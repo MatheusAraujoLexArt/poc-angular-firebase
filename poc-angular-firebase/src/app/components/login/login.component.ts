@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
+  notifications = inject(NotificationService);
   router = inject(Router);
 
   loginForm = this.fb.group({
@@ -31,8 +33,18 @@ export class LoginComponent {
       return;
     }
 
-    await this.authService.login(email, password);
-    this.router.navigate(['/home']);
+    try {
+      this.notifications.showLoading();
+      await this.authService.login(email, password);
+      this.router.navigate(['/home']);
+      this.notifications.success('Logged in successfully!')
+      this.notifications.hideLoading();
+    } catch (error: any) {
+      this.notifications.firebaseError(error)
+    } finally {
+      this.notifications.hideLoading();
+    }
+
   }
 
   email = this.loginForm.get('email');

@@ -3,7 +3,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth'
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAqtlYuPwOTHxVSjt0bDwPJNYannThDuN4",
@@ -15,10 +18,15 @@ const firebaseConfig = {
 };
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(),
+  providers: [
+    provideRouter(routes),
+    provideAnimationsAsync(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig)),
-      provideAuth(() => getAuth())
+      provideAuth(() => getAuth()),
+      provideFirestore(() => getFirestore()),
+      provideStorage(() => getStorage()),
+      MatSnackBarModule,
     ])
   ]
 };
