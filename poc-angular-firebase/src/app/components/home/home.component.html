@@ -1,1 +1,44 @@
-<p>home works!</p>
+<h1 class="center">TODO LIST</h1>
+
+
+<form class="center" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+  <mat-form-field class="example-full-width input">
+    <mat-label>Create a TODO</mat-label>
+    <input matInput placeholder="description..." formControlName="description">
+    
+    <mat-error *ngIf="description?.hasError('required')">
+      Description is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="createTodoButton">
+    <button type="submit" mat-raised-button color="primary">+</button>
+  </div>
+</form>
+
+
+<table *ngIf="todos.length > 0" mat-table [dataSource]="todos" class="mat-elevation-z8" style="text-align: center;">
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let todo">{{ formatDate(todo.createdAt) }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let todo">{{ todo.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Options</th>
+    <td mat-cell *matCellDef="let todo">
+      <div class="buttonsContainer">
+        <button mat-raised-button color="primary">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteTodo(todo.id)">Delete</button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
