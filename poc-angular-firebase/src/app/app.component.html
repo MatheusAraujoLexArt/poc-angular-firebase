@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   Angular Firebase Sign Up App
   <button mat-button *ngIf="currentUser()" [mat-menu-trigger-for]="userMenu">
-    {{ currentUser()?.email }}
+    {{ currentUser()?.displayName }}
     <mat-icon>expand_more</mat-icon>
   </button>
 

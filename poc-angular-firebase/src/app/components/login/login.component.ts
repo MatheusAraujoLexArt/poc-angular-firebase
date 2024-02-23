@@ -44,7 +44,10 @@ export class LoginComponent {
     } finally {
       this.notifications.hideLoading();
     }
+  }
 
+  navigateToSignUp() {
+    this.router.navigate(['/sign-up']);
   }
 
   email = this.loginForm.get('email');

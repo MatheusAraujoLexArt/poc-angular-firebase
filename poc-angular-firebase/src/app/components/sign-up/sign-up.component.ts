@@ -51,7 +51,6 @@ export class SignUpComponent {
   );
 
   async submit() {
-    
     const { name, email, password, confirmPassword } = this.signUpForm.value;
 
     if(!this.signUpForm.valid || !name ||  !email || !password || !confirmPassword) {
@@ -70,6 +69,10 @@ export class SignUpComponent {
     } finally {
       this.notifications.hideLoading();
     }
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/']);
   }
 
   name = this.signUpForm.get('name');
