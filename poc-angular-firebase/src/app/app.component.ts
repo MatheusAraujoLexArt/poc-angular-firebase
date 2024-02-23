@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ import { NotificationService } from './services/notification.service';
   imports: [
     CommonModule,
     RouterOutlet,
+    RouterModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
