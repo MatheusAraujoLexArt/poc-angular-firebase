@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, User, UserCredential, authState, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, User, UserCredential, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
 import { toSignal } from '@angular/core/rxjs-interop'
 
 @Injectable({
@@ -13,6 +13,14 @@ export class AuthService {
 
   login(email: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(this.firebaseAuth, email, password)
+  }
+
+  signUp(email: string, password: string): Promise<UserCredential> {
+    return createUserWithEmailAndPassword(this.firebaseAuth, email, password);
+  }
+
+  setDisplayName(user: User, name: string): Promise<void> {
+    return updateProfile(user, { displayName: name });
   }
 
   logout(): Promise<void> {

@@ -13,6 +13,9 @@ export const getFirebaseErrorMessage = (error: FirebaseError): string => {
     case 'auth/user-not-found':
       message = 'The user was not found'
       break;
+    case 'auth/email-already-in-use':
+      message = 'The user with email already exists'
+      break;
     default:
       message = 'An unexpected error occured. Please contact system administrator'
   }
