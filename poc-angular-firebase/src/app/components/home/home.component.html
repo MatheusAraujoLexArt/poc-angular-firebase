@@ -1,7 +1,7 @@
 <h1 class="center">TODO LIST</h1>
 
 
-<form class="center" style="width: 400px; margin: 0 auto" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+<form class="center" style="width: 400px; margin: 0 auto;" [formGroup]="todoForm" (ngSubmit)="createTodo()">
   <mat-form-field class="example-full-width input">
     <mat-label>Create a TODO</mat-label>
     <input matInput placeholder="description..." formControlName="description">
@@ -11,9 +11,8 @@
     </mat-error>
   </mat-form-field>
 
-  <div class="createTodoButton">
-    <button type="submit" mat-raised-button color="primary">+</button>
-  </div>
+  <button style="margin-left: 5px; margin-top: 10px;" type="submit" mat-raised-button color="primary">+</button>
+
 </form>
 
 <div class="table-style">
