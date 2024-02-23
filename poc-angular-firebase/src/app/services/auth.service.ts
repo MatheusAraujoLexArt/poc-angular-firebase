@@ -8,7 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop'
 export class AuthService {
   firebaseAuth = inject(Auth);
 
-  private currentUser$ = authState(this.firebaseAuth); // variable that changes value at runtime
+  currentUser$ = authState(this.firebaseAuth); // variable that changes value at runtime
   currentUser = toSignal(this.currentUser$);
 
   login(email: string, password: string): Promise<UserCredential> {

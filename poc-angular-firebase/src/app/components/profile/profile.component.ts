@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class ProfileComponent {
   fb = inject(FormBuilder);
+  usersService = inject(UsersService);
 
   profileForm = this.fb.group({
     uuid: [''],
@@ -23,6 +25,13 @@ export class ProfileComponent {
     phone: [''],
     address: [''],
   })
+
+  constructor() {
+    // called every time signal changes or updates
+    effect(() => {
+      this.profileForm.patchValue({ ...this.usersService.currentUserProfile() })
+    })
+  }
 
   saveProfile() {
     console.log('')

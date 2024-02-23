@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotificationService } from './services/notification.service';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -29,10 +30,11 @@ export class AppComponent {
   title = 'poc-angular-firebase';
   router = inject(Router);
   notificationService = inject(NotificationService);
-
   authService = inject(AuthService);
-  currentUser = this.authService.currentUser;
-  loading = this.notificationService.loading
+  usersService = inject(UsersService);
+
+  loading = this.notificationService.loading;
+  currentUser = this.usersService.currentUserProfile;
 
   async logout() {
     await this.authService.logout();
