@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsersService } from '../../services/users.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +15,12 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  fb = inject(FormBuilder);
+  fb = inject(NonNullableFormBuilder);
   usersService = inject(UsersService);
+  notifications = inject(NotificationService);
 
   profileForm = this.fb.group({
-    uuid: [''],
+    uid: [''],
     displayName: [''],
     firstName: [''],
     lastName: [''],
@@ -33,7 +35,21 @@ export class ProfileComponent {
     })
   }
 
-  saveProfile() {
-    console.log('')
+  async saveProfile() {
+    const { uid, ...data } = this.profileForm.value;
+
+    if(!uid) {
+      return;
+    }
+
+    try {
+      this.notifications.showLoading();
+      await this.usersService.updateUser({ uid, ...data });
+      this.notifications.success('Profile updated successfully!')
+    } catch (error: any) {
+      this.notifications.firebaseError(error)
+    } finally {
+      this.notifications.hideLoading();
+    }
   }
 }

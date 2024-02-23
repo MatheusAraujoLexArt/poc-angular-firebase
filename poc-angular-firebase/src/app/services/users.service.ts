@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, docData, setDoc, updateDoc } from '@angular/fire/firestore';
 import { ProfileUser } from '../models/user';
 import { AuthService } from './auth.service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -31,5 +31,10 @@ export class UsersService {
   createUser(user: ProfileUser): Promise<void> {
     const ref = doc(this.firestore, 'users', user.uid);
     return setDoc(ref, user);
+  }
+
+  updateUser(user: ProfileUser) {
+    const ref = doc(this.firestore, 'users', user.uid);
+    return updateDoc(ref, { ...user });
   }
 }
